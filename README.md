@@ -60,8 +60,8 @@ This is the default configuration of the layers used by the `--random` flag. See
 | inception_3a/pool | | | | Similar to pool2/3x3_s2 |
 | inception_3a/pool_proj | | | | Etched squares and dots |
 | pool3/3x3_s2 | X | | | Very trippy, small hints of animals |
-| inception_3b/1x1 | | | Lots of dots and buttons |
-| inception_3b/3x3 | | | Similar but with a grainier almost mossy feel |
+| inception_3b/1x1 | | | | Lots of dots and buttons |
+| inception_3b/3x3 | | | | Similar but with a grainier almost mossy feel |
 | inception_3b/3x3_reduce | | | X | Ladders and circles |
 | inception_3b/5x5 | X | | | Quite busy, rounded squares |
 | inception_3b/5x5_reduce | X | | | As above but longer shapes |
