@@ -7,6 +7,8 @@ RANDOMISE="0"
 OCTAVES=3
 ANIMALS=0
 EYES=1
+ONLYANIMALS=0
+ONLYEYES=0
 NOGIFS=0
 if [ $# -eq 0 ]
 then
@@ -47,6 +49,8 @@ then
  echo '--animals           Includes layers that produce animal shapes (when random flag is on)'
  echo '--noeyes            Disables layers that produce eye shapes (when random flag is on)'
  echo '--nogifs            Skips creating gifs'
+ echo '--onlyeyes          Only uses eye/button style layers'
+ echo '--onlyanimals       Only uses animal style layers'
  echo ""
  echo ----------------------------------------------------------------------------------------
  echo EXAMPLES
@@ -99,6 +103,12 @@ case $key in
     --nogifs)
     NOGIFS=1
     ;;
+    --onlyeyes)
+    ONLYEYES=1
+    ;;
+    --onlyanimals)
+    ONLYANIMALS=1
+    ;;
     *)
     echo Invalid parameter: "$1"
     exit 0
@@ -107,11 +117,6 @@ case $key in
 esac
 shift # past argument or value
 done
-echo EXTENSION  = "${EXTENSION}"
-echo ITERATIONS = "${ITERATIONS}"
-echo LAYER = "${LAYER}"
-echo OCTAVES = "${OCTAVES}"
-echo RANDOMISE = "${RANDOMISE}"
 
 for image in *.$EXTENSION
 do
@@ -120,8 +125,7 @@ do
 	while [ $i -lt $RUNS ]
 	do
 		j=$((i+1))
-		echo dreamifyArgs.py "${i}" "${image}" "${ITERATIONS}"
-		python dreamifyArgs.py $i$image $j$image $ITERATIONS $OCTAVES $LAYER $RANDOMISE $ANIMALS $EYES
+		python dreamifyArgs.py $i$image $j$image $ITERATIONS $OCTAVES $LAYER $RANDOMISE $ANIMALS $EYES $ONLYANIMALS $ONLYEYES
 		i=$((i+1))
 	done
 if [ $NOGIFS -eq 1 ]

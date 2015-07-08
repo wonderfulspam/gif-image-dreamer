@@ -100,22 +100,27 @@ layer = sys.argv[5]
 randomise = int(sys.argv[6])
 animals = int(sys.argv[7])
 eyes = int(sys.argv[8])
+onlyAnimals = int(sys.argv[9])
+onlyEyes = int(sys.argv[10])
 octaveScale = 1.4
 
 if randomise:
  layerList = []
  layerList.append('conv2/3x3_reduce')
- layerList.append('inception_3a/5x5_reduce')
- layerList.append('inception_3a/pool_proj')
+# layerList.append('inception_3a/5x5_reduce')
+# layerList.append('inception_3a/pool_proj')
  layerList.append('pool3/3x3_s2')
  layerList.append('inception_3b/5x5')
  layerList.append('inception_3b/5x5_reduce')
+ if onlyEyes or onlyAnimals:
+  layerList[:] = []
  if eyes:
   layerList.append('inception_3a/output')
   layerList.append('inception_3b/3x3_reduce')
   layerList.append('inception_3b/output')
   layerList.append('inception_3b/pool')
   layerList.append('inception_3b/pool_proj')
+  layerList.append('inception_4a/1x1')
 
  if animals:
   layerList.append('inception_4a/5x5_reduce')
