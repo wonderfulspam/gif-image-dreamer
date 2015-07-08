@@ -4,7 +4,7 @@ RUNS="25"
 ITERATIONS="10"
 LAYER="inception_3b/output"
 RANDOMISE="0"
-OCTAVES=1
+OCTAVES=3
 ANIMALS=0
 EYES=1
 NOGIFS=0
@@ -124,17 +124,16 @@ do
 		python dreamifyArgs.py $i$image $j$image $ITERATIONS $OCTAVES $LAYER $RANDOMISE $ANIMALS $EYES
 		i=$((i+1))
 	done
-done
-if { NOGIFS -eq 1 ]
+if [ $NOGIFS -eq 1 ]
 then
  echo 'Skipping gifs. Done!'
- exit 0
+else
+ echo Creating gif ....
+ convert %01d$image[0-$i] $image.gif
+ echo Creating looped gif ....
+ convert $image.gif -coalesce -duplicate 1,-2-1 -quiet -layers OptimizePlus -loop 0 loop_$image.gif
+ echo Creating morphing looped gif ....
+ convert -morph 1 loop_$image.gif morph_$image.gif
+ echo Finished!
 fi
-echo Creating gif ....
-convert %01d$image[0-$i] $image.gif
-echo Creating looped gif ....
-convert $image.gif -coalesce -duplicate 1,-2-1 -quiet -layers OptimizePlus -loop 0 loop_$image.gif
-echo Creating morphing looped gif ....
-convert -morph 1 loop_$image.gif morph_$image.gif
-echo Finished!
-
+done
